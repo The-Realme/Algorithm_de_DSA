@@ -1,0 +1,16 @@
+1. Linked list- 
+                insertion----Im not using temp as an iterator while doing linked list traversal
+                deletion
+                circular
+
+2. Trees-       
+   Binary       insertion     //this is done 
+                isBST
+
+   Avl          Rotations
+
+3. Graphs-      
+                BFS
+                DFS
+                
+
