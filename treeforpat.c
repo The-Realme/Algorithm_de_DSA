@@ -43,8 +43,55 @@ int isBST(struct node* ptr){
     }
 }
 
-// left rotaion
-// right rotaion
+
+
+int isBST(struct node* root){
+    static struct node* prev=NULL;
+    if(root!=NULL){
+        if(!isBST(root->left)){
+            return 0;
+        }
+        else if(prev!=NULL && prev->data>=root->data){
+            return 0;
+        }
+        prev=root;
+        return isBST(root->right);
+    }
+    else{
+        return 1;
+    }
+}
+struct node* searchrecur(struct node* root,int key){
+    if(root!=NULL){
+        if(root->data==key){
+            return root;
+        }
+        else if(key>root->data){
+            return searchrecur(root->right,key);
+        }
+        else{
+            return searchrecur(root->left,key);
+        }
+    }
+    else{
+        return NULL;
+    }
+}
+
+struct node* searchiter(struct node* root,int key){
+    while(root!=NULL){
+        if(root->data==key){
+            return root;
+        }
+        else if(key>root->data){
+            root=root->right;
+        }
+        else{
+            root=root->left;
+        }
+    }
+    return NULL;
+}
 
 
 int main() {

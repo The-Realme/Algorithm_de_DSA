@@ -8,7 +8,6 @@ struct node {
     struct node* right;
 };
 
-// Helper function to create a new node
 struct node* createNode(int data) {
     struct node* newNode = (struct node*)malloc(sizeof(struct node));
     newNode->data = data;
@@ -17,7 +16,6 @@ struct node* createNode(int data) {
     return newNode;
 }
 
-// Your original isBST function
 int isBST(struct node* root) {
     static struct node *prev = NULL;
     if (root != NULL) {
