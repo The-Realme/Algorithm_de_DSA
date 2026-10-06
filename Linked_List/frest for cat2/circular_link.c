@@ -23,13 +23,11 @@ struct Node * insertAtFirst(struct Node *head, int data){
     while(p->next != head){
         p = p->next;
     }
-    // At this point p points to the last node of this circular linked list
- 
     p->next = ptr;
     ptr->next = head;
-    head = ptr;
-    return head;
- 
+    // head = ptr;
+    // return head;
+    return ptr;
 }
  
 int main(){

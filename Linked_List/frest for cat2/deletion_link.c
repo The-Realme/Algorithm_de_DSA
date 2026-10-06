@@ -20,14 +20,14 @@ void linkedListTraversal(struct Node *ptr)
 struct Node * deleteFirst(struct Node * head){
     struct Node * ptr = head;
     head = head->next;
-    free(ptr);
+    free(ptr);    //this is the most important step
     return head;
 }
 
 // Case 2: Deleting the element at a given index from the linked list
 struct Node * deleteAtIndex(struct Node * head, int index){
     struct Node *p = head;
-    struct Node *q = head->next;
+    struct Node *q = head->next;    //for deletion we need two temp pointers instead of one
     for (int i = 0; i < index-1; i++)
     {
         p = p->next;

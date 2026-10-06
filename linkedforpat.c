@@ -9,17 +9,16 @@ struct node{
 void linkedlisttraversal(struct node* ptr){//thisisimportant for printing the whole linked list as an array
     while(ptr!=NULL)
     {
-        printf(ptr->data);
+        printf("%d",ptr->data);
         ptr=ptr->next;
     }
-
 }
 
 //insert in the first wrong XXX
-struct node* insert(struct node* head,int data){
+struct node* insert_first1(struct node* head,int data){
     struct node* ptr=(struct node*)malloc(sizeof(struct node));
         ptr->data=data;
-        ptr->next=head//this is the issue1;
+        ptr->next=head;
     return ptr;
 }
 
@@ -52,24 +51,63 @@ struct node* insert_end(struct node* head,int data){
 }
 
 struct node* delete_first(struct node* head){  //this isthe fourth issue
+    struct node* p=head;
+    head=head->next;
+    free(p);
+    return head;
     
 }
-struct node* delete_at_index(struct node* head, int index){ //this is the 5th issue
 
+
+struct node* delete_at_index(struct node* head, int index){ //this is the 5th issue
+    struct node* p=head;
+    struct node* q=head->next;
+    for(int i=0;i<index-1;i++){
+        p=p->next;
+        q=q->next;
+    }
+    p->next=q->next;
+    free(q);
+    return head;
+    
 }
 struct node* delete_last(struct node* head){  //this is the 6th issue
-struct node* temp=head;
-while(temp->next!=NULL){
-    temp=temp->next;
-}
-    temp=NULL;
-    // or 
-    free temp;
+    struct node* p=head;
+    struct node* q=head->next;
+    // for(int i=0;i<;i++){
+    //     p=p->next;
+    //     q=q->next;
+    // }
+    while(q->next!=NULL){
+            p=p->next;
+            q=q->next;
+    }
+    p->next=q->next;
+    free(q);
+    return head;
+
 }
 
-//or is these anything like delete at index   //issue 7
+// now the circularlinkedlist
+void circularlinkedlistTraversal(struct node* head){
+    struct node* ptr=head;
+    do{
+        printf("%d ",ptr->data);
+        ptr=ptr->next;
+    }while(ptr->next!=head);
+}
 
-//issue 8: also the circular linked list
+struct node* insert_first(struct node* head){
+    struct node* ptr=(struct node*)malloc(sizeof(struct node));
+    struct node* p=head->next;
+    while(p->next!=head){
+        p=p->next;
+    }
+    p->next=ptr;
+    ptr->data=100;
+    ptr->next=head;
+    return ptr;
+}
 
 int main() {
     struct node* head=(struct node*)malloc(sizeof(struct node));
@@ -79,8 +117,10 @@ int main() {
     struct node* fourth=(struct node*)malloc(sizeof(struct node));
     head->data=1;
     head-next=first;
-
-
+    //use the manual way of creating the linked list
+    linkedListTraversal(head);   //use this for checking the print
+    head=insert_end(head,10);
+    linkedListTraversal(head);
 
 
     return 0;
