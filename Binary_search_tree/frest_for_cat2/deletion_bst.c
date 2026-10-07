@@ -97,40 +97,45 @@ void insert(struct node *root, int key){
 }
 
 struct node *inOrderPredecessor(struct node* root){
+    // Go left once, then all the way right
     root = root->left;
-    while (root->right!=NULL)
-    {
+    while (root != NULL && root->right != NULL) {
         root = root->right;
     }
     return root;
 }
-
 struct node *deleteNode(struct node *root, int value){
-
-    struct node* iPre;
     if (root == NULL){
-        return NULL;
+        return NULL; 
     }
-    if (root->left==NULL&&root->right==NULL){
-        free(root);
-        return NULL;
-    }
-
-    //searching for the node to be deleted
     if (value < root->data){
-        root-> left = deleteNode(root->left,value);
-    }
+        root->left = deleteNode(root->left, value);
+    } 
     else if (value > root->data){
-        root-> right = deleteNode(root->right,value);
-    }
-    //deletion strategy when the node is found
-    else{
-        iPre = inOrderPredecessor(root);
+        root->right = deleteNode(root->right, value);
+    } 
+    else {
+        // CASE 1 & 2: Node has 0 children or only 1 child
+        if (root->left == NULL) {
+            struct node *temp = root->right;
+            free(root);
+            return temp; // Connects parent directly to right child
+        } 
+        else if (root->right == NULL) {
+            struct node *temp = root->left;
+            free(root);
+            return temp; // Connects parent directly to left child
+        }
+        // CASE 3: Node has 2 children
+        struct node* iPre = inOrderPredecessor(root);
+        // Copy the predecessor's data to this node
         root->data = iPre->data;
+        // Delete the old predecessor node from the left subtree
         root->left = deleteNode(root->left, iPre->data);
     }
     return root;
 }
+
  
 int main(){
      

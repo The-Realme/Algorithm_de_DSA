@@ -1,16 +1,24 @@
-1. Linked list- 
+1. Stack-      standard stack(push,pop,isfull,isempty)
+
+2. Queue-      standard Queue(push,pop,isfull,isempty)
+               D-Queue (++ front pop,push_back)
+               circular Queue
+
+3. Linked list- 
                 insertion ----ALH (while loops for index search and the NULL pointer search)
                 deletion  ----used the temp iterators to delete(one temp for deletion of first rest all two temp iterators)
                 circular  ----use DO while for iteration then insert the first element using the head fixed
 
-2. Trees-       
+4. Trees-       
    Binary       insertion                  //this is done (lite+pro)
                 isBST                     //this is done too.. (training + testing)
                 search(iter+recursive)   //this is done (both iter and recur)
+                deletion  !!!!!!!!!!!!!!!!!!Thisisthedely
 
-   Avl          Rotations
 
-3. Graphs-      
+   Avl          Rotations  //done ALH
+
+5. Graphs-      
                 BFS
                 DFS
                 

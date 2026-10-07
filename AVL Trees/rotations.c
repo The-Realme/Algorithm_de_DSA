@@ -3,7 +3,7 @@
  
 struct Node
 {
-    int key;
+    int data;
     struct Node *left;
     struct Node *right;
     int height;
@@ -15,9 +15,9 @@ int getHeight(struct Node *n){
     return n->height;
 }
  
-struct Node *createNode(int key){
+struct Node *createNode(int data){
     struct Node* node = (struct Node *) malloc(sizeof(struct Node));
-    node->key = key;
+    node->data = data;
     node->left = NULL;
     node->right = NULL;
     node->height = 1;
@@ -42,8 +42,8 @@ struct Node* rightRotate(struct Node* y){
     x->right = y;
     y->left = T2;
  
-    x->height = max(getHeight(x->right), getHeight(x->left)) + 1;
     y->height = max(getHeight(y->right), getHeight(y->left)) + 1;
+    x->height = max(getHeight(x->right), getHeight(x->left)) + 1;
  
     return x;
 }
@@ -61,33 +61,33 @@ struct Node* leftRotate(struct Node* x){
     return y;
 }
  
-struct Node *insert(struct Node* node, int key){
+struct Node *insert(struct Node* node, int data){
     if (node == NULL)
-        return  createNode(key);
+        return  createNode(data);
  
-    if (key < node->key)
-        node->left  = insert(node->left, key);
-    else if (key > node->key)
-        node->right = insert(node->right, key);
+    if (data < node->data)
+        node->left  = insert(node->left, data);
+    else if (data > node->data)
+        node->right = insert(node->right, data);
  
-    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
-    int bf = getBalanceFactor(node);
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));    // This is the first thing to find height
+    int bf = getBalanceFactor(node);                                         // The second thing is to find the balancing factor
  
     // Left Left Case
-        if(bf>1 && key < node->left->key){
+        if(bf>1 && data < node->left->data){
             return rightRotate(node);
         }
     // Right Right Case
-        if(bf<-1 && key > node->right->key){
+        if(bf<-1 && data > node->right->data){
             return leftRotate(node);
         }
     // Left Right Case
-    if(bf>1 && key > node->left->key){
+    if(bf>1 && data > node->left->data){
             node->left = leftRotate(node->left);
             return rightRotate(node);
         }
     // Right Left Case
-    if(bf<-1 && key < node->right->key){
+    if(bf<-1 && data < node->right->data){
             node->right = rightRotate(node->right);
             return leftRotate(node);
         }
@@ -98,7 +98,7 @@ void preOrder(struct Node *root)
 {
     if(root != NULL)
     {
-        printf("%d ", root->key);
+        printf("%d ", root->data);
         preOrder(root->left);
         preOrder(root->right);
     }
