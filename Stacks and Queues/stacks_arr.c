@@ -3,12 +3,12 @@
  //this is the dynamic arrray implementation
 struct stack{
     int size;
-    int top;
+    int r;
     int* arr;
 };
 
 int isEmpty(struct stack* ptr){
-    if(ptr->top == -1){
+    if(ptr->r == -1){
             return 1;
         }
         else{
@@ -17,7 +17,7 @@ int isEmpty(struct stack* ptr){
 }
 
 int isFull(struct stack* ptr){
-    if(ptr->top == ptr->size - 1){
+    if(ptr->r == ptr->size - 1){
         return 1;
     }
     else{
@@ -30,8 +30,8 @@ void push(struct stack* ptr, int val){
         printf("Stack Overflow! Cannot push %d to the stack\n", val);
     }
     else{
-        ptr->top++;
-        ptr->arr[ptr->top] = val;
+        ptr->r++;
+        ptr->arr[ptr->r] = val;
     }
 }
  
@@ -41,8 +41,8 @@ int pop(struct stack* ptr){
         return -1;
     }
     else{
-        int val = ptr->arr[ptr->top];
-        ptr->top--;
+        int val = ptr->arr[ptr->r];
+        ptr->r--;
         return val;
     }
 }
@@ -50,11 +50,11 @@ int pop(struct stack* ptr){
 int main(){
     struct stack *sp = (struct stack *) malloc(sizeof(struct stack));
     sp->size = 10;
-    sp->top = -1;
+    sp->r = -1;
     // OR
 //struct stack sp;
 //sp.size = 10;
-//sp.top = -1;
+//sp.r = -1;
 // and push /pop methods change as->
 // push(&sp, 15);
 // push(&sp, 23);

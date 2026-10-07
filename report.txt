@@ -1,8 +1,8 @@
-1. Stack-      standard stack(push,pop,isfull,isempty)
+1. Stack-      standard stack(push,pop,isfull,isempty)   //ALH done
 
-2. Queue-      standard Queue(push,pop,isfull,isempty)
-               D-Queue (++ front pop,push_back)
-               circular Queue
+2. Queue-      standard Queue(push,pop,isfull,isempty)  //ALH done
+               D-Queue (++ front pop,push_back)        //ALH done
+               circular Queue                         //ALH done
 
 3. Linked list- 
                 insertion ----ALH (while loops for index search and the NULL pointer search)
