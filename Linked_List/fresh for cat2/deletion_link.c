@@ -56,7 +56,7 @@ struct Node * deleteAtLast(struct Node * head){
 
 
 // Case 4: Deleting the element with a given value from the linked list
-struct Node * deleteAtIndex(struct Node * head, int value){
+struct Node * deleteAtIndex_con_value(struct Node * head, int value){
     struct Node *p = head;
     struct Node *q = head->next;
     while(q->data!=value && q->next!= NULL)
@@ -65,7 +65,7 @@ struct Node * deleteAtIndex(struct Node * head, int value){
         q = q->next;
     }
     
-    if(q->data == value){
+    if(q->next != NULL){
         p->next = q->next;
         free(q);
     }

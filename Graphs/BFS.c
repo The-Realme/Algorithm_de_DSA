@@ -51,9 +51,8 @@ int main(){
     // Initializing Queue (Array Implementation)
     struct queue q;
     q.size = 400;
-    q.f = q.r = 0;
+    q.f = q.r = -1;
     q.arr = (int*) malloc(q.size*sizeof(int));
-    
     // BFS Implementation 
     int node;
     int i = 1;
@@ -70,11 +69,9 @@ int main(){
     printf("%d", i);
     visited[i] = 1;
     enqueue(&q, i); // Enqueue i for exploration
-    while (!isEmpty(&q))
-    {
-        int node = dequeue(&q);
-        for (int j = 0; j < 7; j++)
-        {
+    while (!isEmpty(&q)){
+        int node = dequeue(&q);  //dequeue for hunting
+        for (int j = 0; j < 7; j++){
             if(a[node][j] ==1 && visited[j] == 0){
                 printf("%d", j);
                 visited[j] = 1;

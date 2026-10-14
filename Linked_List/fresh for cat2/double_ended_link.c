@@ -16,7 +16,7 @@ void linkedlisttraversal(struct node* ptr){//thisisimportant for printing the wh
         ptr=ptr->next;
     }
 }
- 
+
 struct Node * insertAtFirst(struct Node *head, int data){
     struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
     ptr->data = data;

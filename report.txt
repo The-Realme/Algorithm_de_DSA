@@ -23,3 +23,22 @@
                 DFS
                 
 
+// Report for revision 1: 
+// 1.Circular and double linked list with deletion   Done 10/14/2026
+// 2. deletion is the BST  
+// 3. AVL trees       Done 10/14/2026
+// 4. Full graph
+
+
+
+
+
+
+
+
+
+
+
+
+
+
