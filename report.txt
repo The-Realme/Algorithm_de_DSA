@@ -19,8 +19,8 @@
    Avl          Rotations  //done ALH
 
 5. Graphs-      
-                BFS
-                DFS
+                BFS    //done ALH
+                DFS   //done ALH
                 
 
 // Report for revision 1: 
