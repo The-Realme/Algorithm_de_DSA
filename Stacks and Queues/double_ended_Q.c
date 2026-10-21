@@ -29,7 +29,7 @@ void insertRear(struct deque *ptr, int val) {
     if (isFull(ptr)) {
         printf("Deque Overflow: Cannot insert at rear\n");
     } else {
-        ptr->r = (ptr->r + 1) % ptr->size;
+        ptr->r = (ptr->r + 1) % ptr->size;   //this one damn line
         ptr->arr[ptr->r] = val;
         printf("Inserted %d at Rear\n", val);
     }
@@ -41,8 +41,8 @@ void insertFront(struct deque *ptr, int val) {
         printf("Deque Overflow: Cannot insert at front\n");
     } else {
         // Move front backward circularly. Adding ptr->size handles negative indexing.
-        ptr->arr[ptr->f] = val; // Store value at current 'f' position
         ptr->f = (ptr->f - 1 + ptr->size) % ptr->size; 
+        ptr->arr[ptr->f] = val; // Store value at current 'f' position
         printf("Inserted %d at Front\n", val);
     }
 }

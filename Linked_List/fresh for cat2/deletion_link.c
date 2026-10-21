@@ -19,9 +19,9 @@ void linkedListTraversal(struct Node *ptr)
 // Case 1: Deleting the first element from the linked list
 struct Node * deleteFirst(struct Node * head){
     struct Node * ptr = head;
-    head = head->next;
-    free(ptr);    //this is the most important step
-    return head;
+    head = head->next;  //move the head by one posiiton
+    free(head);    //this is the most important step
+    return temp;
 }
 
 // Case 2: Deleting the element at a given index from the linked list
@@ -43,7 +43,7 @@ struct Node * deleteAtIndex(struct Node * head, int index){
 struct Node * deleteAtLast(struct Node * head){
     struct Node *p = head;
     struct Node *q = head->next;
-    while(q->next !=NULL)
+    while(q->next !=NULL)  //this is for last index and everything else is same
     {
         p = p->next;
         q = q->next;

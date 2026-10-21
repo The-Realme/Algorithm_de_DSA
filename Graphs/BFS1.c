@@ -11,14 +11,14 @@ int A[7][7] = {
     {0,0,0,0,1,0,0}
 };
 
-void BFS(int start) {
+void BFS(int i) {
     int queue[7];
     int f = 0, r = 0; // Front and Rear pointers for the queue
+    queue[r++] = i; 
 
-    // Enqueue start node
-    printf("%d ", start);
-    visited[start] = 1;
-    queue[r++] = start; 
+    // Enqueue i node
+    printf("%d ", i);
+    visited[i] = 1;
 
     while (f < r) {
         int node = queue[f++]; // Dequeue
