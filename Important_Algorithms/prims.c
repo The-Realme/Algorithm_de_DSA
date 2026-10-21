@@ -1,61 +1,54 @@
-// This implementation uses an adjacency matrix representation of a weighted graph. 
-// It repeatedly picks the vertex with the minimum key value from the set of vertices not yet included in the MST.
-
-
 #include <stdio.h>
-#include <stdbool.h>
-
-#define V 5 // Number of vertices in the graph
+#define V 5 
 #define INF 999999
+int findMinKey(int key[], int inMST[]) {
+    int min = INF;
+    int min_index = -1;
 
-// Function to find the vertex with the minimum key value
-int findMinKey(int key[], bool mstSet[]) {
-    int min = INF, min_index;
-    for (int v = 0; v < V; v++) {
-        if (mstSet[v] == false && key[v] < min) {
-            min = key[v];
-            min_index = v;
+    for (int i = 0; i < V; i++) {
+        if (inMST[i] == 0 && key[i] < min) {
+            min = key[i];
+            min_index = i;
         }
     }
     return min_index;
 }
-
 void primMST(int graph[V][V]) {
-    int parent[V];  // Array to store the constructed MST
-    int key[V];     // Key values used to pick minimum weight edge
-    bool mstSet[V]; // To represent set of vertices included in MST
+    int parent[V];  // Stores the final edges of the MST
+    int key[V];     // Keeps track of the lowest weight to connect each vertex
+    int inMST[V];   // Custom tracker: 1 if inside MST, 0 if not
 
-    // Initialize all keys as INFINITE and mstSet[] as false
+    // Initialize all tracking arrays
     for (int i = 0; i < V; i++) {
         key[i] = INF;
-        mstSet[i] = false;
+        inMST[i] = 0; // 0 means "not yet included"
     }
+    key[0] = 0;     
+    parent[0] = -1; // Root node has no parent
 
-    // Always include first vertex in MST
-    key[0] = 0;     // Make key 0 so that this vertex is picked as first vertex
-    parent[0] = -1; // First node is always root of MST
+    // The MST will grow until it connects all V vertices
+    for (int i = 0; i < V - 1; i++) {
+        
+        // 1. Find the best vertex to pick next using our helper function
+        int u = findMinKey(key, inMST);
 
-    // The MST will have V vertices
-    for (int count = 0; count < V - 1; count++) {
-        // Pick the minimum key vertex from the set of vertices not yet included in MST
-        int u = findMinKey(key, mstSet);
+        // 2. Put this vertex into our MST
+        inMST[u] = 1;
 
-        // Add the picked vertex to the MST Set
-        mstSet[u] = true;
-
-        // Update key value and parent index of the adjacent vertices of the picked vertex.
-        for (int v = 0; v < V; v++) {
-            // graph[u][v] is non-zero only for adjacent vertices of m
-            // mstSet[v] is false for vertices not yet included in MST
-            // Update the key only if graph[u][v] is smaller than key[v]
-            if (graph[u][v] && mstSet[v] == false && graph[u][v] < key[v]) {
-                parent[v] = u;
-                key[v] = graph[u][v];
+        // 3. Update the tracking keys for all neighbors of vertex 'u'
+        for (int i = 0; i < V; i++) {
+            // Check if:
+            // - There is a valid connection (graph[u][i] != 0)
+            // - The neighbor is not already in the tree (inMST[i] == 0)
+            // - This new pathway is cheaper than its current known pathway
+            if (graph[u][i] != 0 && inMST[i] == 0 && graph[u][i] < key[i]) {
+                parent[i] = u;
+                key[i] = graph[u][i];
             }
         }
     }
 
-    // Print the constructed MST
+    // Print the final MST results
     printf("Edge \tWeight\n");
     int totalCost = 0;
     for (int i = 1; i < V; i++) {
@@ -66,16 +59,7 @@ void primMST(int graph[V][V]) {
 }
 
 int main() {
-    /* Let us create the following graph
-          2    3
-       (0)--(1)--(2)
-
-        |   / \   |
-       6|  8/   \5 |7
-
-        | /       \|
-       (3)-------(4)
-             9          */
+    // The input graph (Adjacency Matrix)
     int graph[V][V] = {
         {0, 2, 0, 6, 0},
         {2, 0, 3, 8, 5},
@@ -84,6 +68,8 @@ int main() {
         {0, 5, 7, 9, 0}
     };
 
+    // Run the algorithm
     primMST(graph);
+    
     return 0;
 }
