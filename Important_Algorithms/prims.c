@@ -25,25 +25,17 @@ void primMST(int graph[V][V]) {
     }
     key[0] = 0;     
     parent[0] = -1; // Root node has no parent
-
     // The MST will grow until it connects all V vertices
-    for (int i = 0; i < V - 1; i++) {
-        
+        for (int i = 0; i < V; i++) {
         // 1. Find the best vertex to pick next using our helper function
         int u = findMinKey(key, inMST);
-
-        // 2. Put this vertex into our MST
+        // Safety check: stops if the remaining graph is completely disconnected
+        if (u == -1) break;
         inMST[u] = 1;
-
-        // 3. Update the tracking keys for all neighbors of vertex 'u'
-        for (int i = 0; i < V; i++) {
-            // Check if:
-            // - There is a valid connection (graph[u][i] != 0)
-            // - The neighbor is not already in the tree (inMST[i] == 0)
-            // - This new pathway is cheaper than its current known pathway
-            if (graph[u][i] != 0 && inMST[i] == 0 && graph[u][i] < key[i]) {
-                parent[i] = u;
-                key[i] = graph[u][i];
+        for (int j = 0; j < V; j++) {
+            if (graph[u][j] != 0 && inMST[j] == 0 && graph[u][j] < key[j]) {
+                parent[j] = u;
+                key[j] = graph[u][j];
             }
         }
     }
