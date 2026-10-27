@@ -1,2 +1,0 @@
-;
-    // second->next=NUL
